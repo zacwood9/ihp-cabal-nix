@@ -9,16 +9,18 @@ let
         # This function is called for building each haskell package.
         # By overriding it here, we can pass in custom settings globally.
         mkDerivation = args: haskellPackagesOld.mkDerivation (args // {
-          enableLibraryProfiling = true;
-          enableExecutableProfiling = true;
-          doCheck = false;
-          doHaddock = false;
-          doHoogle = false;
+          # enableLibraryProfiling = true;
+          # enableExecutableProfiling = true;
+          # doCheck = false;
+          # doHaddock = false;
+          # doHoogle = false;
         });
 
         # We don't want to enable profiling for build tools.
         cabal2nix = haskellLib.disableLibraryProfiling (haskellLib.disableExecutableProfiling haskellPackagesOld.cabal2nix);
         hackage2nix = haskellLib.disableLibraryProfiling (haskellLib.disableExecutableProfiling haskellPackagesOld.hackage2nix);
+
+        haskell-language-server = haskellLib.appendConfigureFlag haskellPackagesOld.haskell-language-server "--ghc-option=-eventlog";
 
         # Marked broken, but works fine.
         contiguous = haskellLib.unmarkBroken haskellPackagesOld.contiguous;
@@ -57,6 +59,7 @@ in
         buildInputs = with haskellPackages; [
           pkgs.cabal-install
           pkgs.postgresql
+          pkgs.haskell-language-server
 
           ihp
         ];

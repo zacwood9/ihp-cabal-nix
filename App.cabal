@@ -154,8 +154,31 @@ executable App
   import: shared-deps
   import: shared-opts
 
-  main-is:             Main.hs
   hs-source-dirs:      . build Config
+
+  main-is:             Main.hs
+  other-modules:       RootApplication
+                       Application.Helper.Controller
+                       Application.Helper.View
+                       Application.Script.TestScript
+                       Application.Script.Prelude
+                       Application.Script.RunJobs
+                       Web.Types
+                       Web.Routes
+                       Web.FrontController
+                       Web.Controller.Dogs
+                       Web.Controller.Prelude
+                       Web.Controller.Static
+                       Web.View.Prelude
+                       Web.View.Layout
+                       Web.View.Dogs.Edit
+                       Web.View.Dogs.Index
+                       Web.View.Dogs.New
+                       Web.View.Dogs.Show
+                       Web.View.Static.Welcome
+                       Generated.Types
+                       Config
+
 
 executable TestScript
   import: shared-extensions

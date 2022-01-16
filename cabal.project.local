@@ -1,0 +1,8 @@
+ignore-project: False
+profiling: True
+
+package *
+  ghc-options: -fprof-auto "-with-rtsopts=-N -p -s -h -i0.1"
+
+program-options
+  ghc-options: -fprof-auto "-with-rtsopts=-N -p -s -h -i0.1"
